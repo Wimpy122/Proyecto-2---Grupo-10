@@ -1,0 +1,237 @@
+[
+ {
+  "id": 1,
+  "categoria": "Disponibilidad",
+  "pregunta": "¿Qué habitaciones están disponibles?",
+  "esperado_todos": [
+   "102",
+   "201",
+   "202",
+   "302"
+  ],
+  "criterio": "Lista exactamente las libres: 102, 201, 202, 302 (no 101 ni 301)."
+ },
+ {
+  "id": 2,
+  "categoria": "Capacidad",
+  "pregunta": "Necesito una habitación para 3 personas",
+  "esperado_todos": [
+   "302"
+  ],
+  "criterio": "Solo la 302 (suite libre con capacidad >= 3); 301 está ocupada."
+ },
+ {
+  "id": 3,
+  "categoria": "Servicios",
+  "pregunta": "¿Qué servicios incluye la suite?",
+  "esperado_todos": [
+   "wifi",
+   "desayuno",
+   "spa"
+  ],
+  "criterio": "wifi, desayuno y spa."
+ },
+ {
+  "id": 4,
+  "categoria": "Servicios",
+  "pregunta": "¿Qué habitaciones tienen spa?",
+  "esperado_todos": [
+   "302"
+  ],
+  "criterio": "Las suites 301 y 302 (libre: solo 302)."
+ },
+ {
+  "id": 5,
+  "categoria": "Negación (mundo cerrado)",
+  "pregunta": "¿Cuáles no tienen spa?",
+  "esperado_todos": [
+   "101",
+   "102",
+   "201",
+   "202"
+  ],
+  "criterio": "101, 102, 201 y 202 (las no-suite)."
+ },
+ {
+  "id": 6,
+  "categoria": "Cuantificador universal",
+  "pregunta": "¿Todas las habitaciones tienen wifi?",
+  "esperado_alguno": [
+   "si,",
+   "sí,",
+   "si ",
+   "sí "
+  ],
+  "criterio": "Sí: todos los tipos incluyen wifi."
+ },
+ {
+  "id": 7,
+  "categoria": "Cuantificador universal",
+  "pregunta": "¿Están todas las habitaciones ocupadas?",
+  "esperado_todos": [
+   "no",
+   "102"
+  ],
+  "criterio": "No; hay libres (102, 201, 202, 302)."
+ },
+ {
+  "id": 8,
+  "categoria": "Relaciones",
+  "pregunta": "¿Hay habitaciones contiguas libres?",
+  "esperado_todos": [
+   "201",
+   "202"
+  ],
+  "criterio": "Sí: 201 y 202 (301-302 y 101-102 no cumplen por estado)."
+ },
+ {
+  "id": 9,
+  "categoria": "Precios",
+  "pregunta": "¿Cuánto cuesta una doble por 3 noches?",
+  "esperado_alguno": [
+   "225000",
+   "225.000"
+  ],
+  "criterio": "3 x 75.000 = 225.000."
+ },
+ {
+  "id": 10,
+  "categoria": "Estado",
+  "pregunta": "¿Puedo reservar la 102 para hoy?",
+  "esperado_alguno": [
+   "libre",
+   "disponible",
+   "si,",
+   "sí,"
+  ],
+  "criterio": "Sí: la 102 está libre (formulación natural, sin las palabras 'estado/libre')."
+ },
+ {
+  "id": 11,
+  "categoria": "Explicación",
+  "pregunta": "Explica por qué la 302 sirve para 2 personas",
+  "esperado_todos": [
+   "302",
+   "4"
+  ],
+  "criterio": "Capacidad 4 >= 2 y estado libre."
+ },
+ {
+  "id": 12,
+  "categoria": "Políticas",
+  "pregunta": "¿A qué hora es el check-in?",
+  "esperado_todos": [
+   "13:00"
+  ],
+  "criterio": "Desde las 13:00."
+ },
+ {
+  "id": 13,
+  "categoria": "Políticas",
+  "pregunta": "¿Puedo llevar a mi loro?",
+  "esperado_todos": [
+   "no"
+  ],
+  "criterio": "No: el hotel no permite mascotas (vocabulario no previsto: 'loro').",
+  "esperado_alguno": [
+   "mascota",
+   "no se permiten",
+   "no se aceptan",
+   "no puede",
+   "no, ",
+   "no es posible"
+  ]
+ },
+ {
+  "id": 14,
+  "categoria": "Razonamiento",
+  "pregunta": "¿Cuál es la habitación libre más barata?",
+  "esperado_todos": [
+   "102",
+   "75000"
+  ],
+  "criterio": "102 (doble, $75.000); la 101 más barata está ocupada. Acepta 75.000 con punto."
+ },
+ {
+  "id": 15,
+  "categoria": "Razonamiento",
+  "pregunta": "¿La 101 tiene desayuno?",
+  "esperado_todos": [
+   "no"
+  ],
+  "criterio": "No: la 101 es simple (solo wifi)."
+ },
+ {
+  "id": 16,
+  "categoria": "Precios",
+  "pregunta": "¿Cuánto cuesta la 301 por 2 noches?",
+  "esperado_alguno": [
+   "300000",
+   "300.000"
+  ],
+  "criterio": "2 x 150.000 = 300.000 (aunque esté ocupada, el precio existe)."
+ },
+ {
+  "id": 17,
+  "categoria": "Lenguaje natural",
+  "pregunta": "Somos una familia de 4 y queremos dos habitaciones juntas, ¿tienen?",
+  "esperado_todos": [
+   "201",
+   "202"
+  ],
+  "criterio": "201 y 202 (dobles contiguas libres, 2+2 personas)."
+ },
+ {
+  "id": 18,
+  "categoria": "Razonamiento",
+  "pregunta": "Llego mañana y mi plan cambió, ¿puedo cancelar gratis el día anterior?",
+  "esperado_alguno": [
+   "no es gratis",
+   "no es gratuit",
+   "no, ",
+   "no podr",
+   "no puede",
+   "ya no",
+   "no se puede",
+   "no seria",
+   "no sería"
+  ],
+  "criterio": "Cancelar el día anterior (≈24 h) NO es gratis: la gratuita es hasta 48 h antes. Requiere razonar, no solo citar la política.",
+  "esperado_todos": [
+   "48"
+  ]
+ },
+ {
+  "id": 19,
+  "categoria": "Fuera de la base",
+  "pregunta": "¿Tienen piscina?",
+  "esperado_alguno": [
+   "no tengo",
+   "no hay informacion",
+   "no hay información",
+   "no cuenta",
+   "no entendi",
+   "no entendí",
+   "no pude",
+   "no dispongo"
+  ],
+  "criterio": "Debe admitir que no tiene esa información (no inventar)."
+ },
+ {
+  "id": 20,
+  "categoria": "Fuera del dominio",
+  "pregunta": "¿Cuál es la capital de Francia?",
+  "esperado_alguno": [
+   "no tengo",
+   "no puedo",
+   "solo",
+   "sólo",
+   "no entendi",
+   "no entendí",
+   "no pude",
+   "no dispongo",
+   "hotel"
+  ],
+  "criterio": "No debe responder (fuera del dominio del hotel)."
+ }
+]

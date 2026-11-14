@@ -1,0 +1,357 @@
+[
+ {
+  "id": 1,
+  "categoria": "Disponibilidad",
+  "pregunta": "¿Qué habitaciones están disponibles?",
+  "esperado_todos": [
+   "102",
+   "201",
+   "202",
+   "302"
+  ],
+  "criterio": "Lista exactamente las libres: 102, 201, 202, 302 (no 101 ni 301).",
+  "prolog": "Habitaciones disponibles:\n  Habitacion 102 (doble), capacidad 2: $75000 por noche\n  Habitacion 201 (doble), capacidad 2: $75000 por noche\n  Habitacion 202 (doble), capacidad 2: $75000 por noche\n  Habitacion 302 (suite), capacidad 4: $150000 por noche",
+  "prolog_ms": 78.8,
+  "prolog_ok": true,
+  "llm": "Las habitaciones disponibles actualmente son: 102, 201, 202 y 302.",
+  "llm_ms": 2220.3,
+  "llm_ok": true
+ },
+ {
+  "id": 2,
+  "categoria": "Capacidad",
+  "pregunta": "Necesito una habitación para 3 personas",
+  "esperado_todos": [
+   "302"
+  ],
+  "criterio": "Solo la 302 (suite libre con capacidad >= 3); 301 está ocupada.",
+  "prolog": "Opciones para 3 persona(s), de menor a mayor precio:\n  Habitacion 302 (suite): $150000 por noche",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "La única habitación con capacidad para 3 o más personas es la suite (capacidad 4). Actualmente, la habitación 302 está libre y tiene un valor de 150.000 CLP por noche.",
+  "llm_ms": 2011.9,
+  "llm_ok": true
+ },
+ {
+  "id": 3,
+  "categoria": "Servicios",
+  "pregunta": "¿Qué servicios incluye la suite?",
+  "esperado_todos": [
+   "wifi",
+   "desayuno",
+   "spa"
+  ],
+  "criterio": "wifi, desayuno y spa.",
+  "prolog": "La habitacion suite incluye:\n  - wifi\n  - desayuno\n  - spa",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "La suite incluye wifi, desayuno y spa.",
+  "llm_ms": 3442.7,
+  "llm_ok": true
+ },
+ {
+  "id": 4,
+  "categoria": "Servicios",
+  "pregunta": "¿Qué habitaciones tienen spa?",
+  "esperado_todos": [
+   "302"
+  ],
+  "criterio": "Las suites 301 y 302 (libre: solo 302).",
+  "prolog": "El servicio spa esta incluido en: [suite].\nHabitaciones libres con spa: [302]",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "Las habitaciones tipo suite incluyen spa. Actualmente, la habitación 302 es la única suite disponible.",
+  "llm_ms": 3024.0,
+  "llm_ok": true
+ },
+ {
+  "id": 5,
+  "categoria": "Negación (mundo cerrado)",
+  "pregunta": "¿Cuáles no tienen spa?",
+  "esperado_todos": [
+   "101",
+   "102",
+   "201",
+   "202"
+  ],
+  "criterio": "101, 102, 201 y 202 (las no-suite).",
+  "prolog": "Habitaciones que no incluyen spa: [101,102,201,202]",
+  "prolog_ms": 0.6,
+  "prolog_ok": true,
+  "llm": "Las habitaciones simple (101) y doble (102, 201, 202) no incluyen spa. Solo las habitaciones tipo suite incluyen ese servicio.",
+  "llm_ms": 3322.5,
+  "llm_ok": true
+ },
+ {
+  "id": 6,
+  "categoria": "Cuantificador universal",
+  "pregunta": "¿Todas las habitaciones tienen wifi?",
+  "esperado_alguno": [
+   "si,",
+   "sí,",
+   "si ",
+   "sí "
+  ],
+  "criterio": "Sí: todos los tipos incluyen wifi.",
+  "prolog": "Si, todas las habitaciones incluyen wifi.",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "Sí, todas las habitaciones (simple, doble y suite) incluyen servicio de wifi.",
+  "llm_ms": 3123.5,
+  "llm_ok": true
+ },
+ {
+  "id": 7,
+  "categoria": "Cuantificador universal",
+  "pregunta": "¿Están todas las habitaciones ocupadas?",
+  "esperado_todos": [
+   "no",
+   "102"
+  ],
+  "criterio": "No; hay libres (102, 201, 202, 302).",
+  "prolog": "No, hay habitaciones libres: [102,201,202,302]",
+  "prolog_ms": 0.3,
+  "prolog_ok": true,
+  "llm": "No, no todas están ocupadas. Las habitaciones 102, 201, 202 y 302 se encuentran actualmente libres.",
+  "llm_ms": 1915.1,
+  "llm_ok": true
+ },
+ {
+  "id": 8,
+  "categoria": "Relaciones",
+  "pregunta": "¿Hay habitaciones contiguas libres?",
+  "esperado_todos": [
+   "201",
+   "202"
+  ],
+  "criterio": "Sí: 201 y 202 (301-302 y 101-102 no cumplen por estado).",
+  "prolog": "Pares de habitaciones contiguas libres:\n  201 y 202",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "Sí, las habitaciones 201 y 202 son contiguas y ambas están libres. También las habitaciones 102 y 202 están libres, pero no son contiguas entre sí.",
+  "llm_ms": 2126.5,
+  "llm_ok": true
+ },
+ {
+  "id": 9,
+  "categoria": "Precios",
+  "pregunta": "¿Cuánto cuesta una doble por 3 noches?",
+  "esperado_alguno": [
+   "225000",
+   "225.000"
+  ],
+  "criterio": "3 x 75.000 = 225.000.",
+  "prolog": "Una habitacion doble cuesta $75000 por noche (3 noche(s): $225000).",
+  "prolog_ms": 0.7,
+  "prolog_ok": true,
+  "llm": "Una habitación doble cuesta 75.000 CLP por noche. Por 3 noches, el total es 225.000 CLP.",
+  "llm_ms": 2033.7,
+  "llm_ok": true
+ },
+ {
+  "id": 10,
+  "categoria": "Estado",
+  "pregunta": "¿Puedo reservar la 102 para hoy?",
+  "esperado_alguno": [
+   "libre",
+   "disponible",
+   "si,",
+   "sí,"
+  ],
+  "criterio": "Sí: la 102 está libre (formulación natural, sin las palabras 'estado/libre').",
+  "prolog": "No entendi tu pregunta. Escribe \"ayuda\" para ver ejemplos.",
+  "prolog_ms": 0.2,
+  "prolog_ok": false,
+  "llm": "Sí, la habitación 102 está libre. Su valor es de 75.000 CLP por noche e incluye wifi y desayuno.",
+  "llm_ms": 2615.7,
+  "llm_ok": true
+ },
+ {
+  "id": 11,
+  "categoria": "Explicación",
+  "pregunta": "Explica por qué la 302 sirve para 2 personas",
+  "esperado_todos": [
+   "302",
+   "4"
+  ],
+  "criterio": "Capacidad 4 >= 2 y estado libre.",
+  "prolog": "Meta: buscar_habitacion(2, 302, Tipo, Precio)\n  1. habitacion(302, T, C, P) unifica con el hecho habitacion(302, suite, 4, 150000): {T/suite, C/4, P/150000}\n  2. 4 >= 2 es verdadero\n  3. disponible(302): existe el hecho estado(302, libre)\nConclusion: VERDADERO, la habitacion 302 sirve para 2 persona(s).",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "La habitación 302 es de tipo suite, la cual tiene una capacidad máxima de 4 personas. Por lo tanto, es apta para hospedar a 2 personas.",
+  "llm_ms": 1846.3,
+  "llm_ok": true
+ },
+ {
+  "id": 12,
+  "categoria": "Políticas",
+  "pregunta": "¿A qué hora es el check-in?",
+  "esperado_todos": [
+   "13:00"
+  ],
+  "criterio": "Desde las 13:00.",
+  "prolog": "El check-in es desde las 13:00.",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "El check-in es desde las 13:00.",
+  "llm_ms": 1652.8,
+  "llm_ok": true
+ },
+ {
+  "id": 13,
+  "categoria": "Políticas",
+  "pregunta": "¿Puedo llevar a mi loro?",
+  "esperado_todos": [
+   "no"
+  ],
+  "criterio": "No: el hotel no permite mascotas (vocabulario no previsto: 'loro').",
+  "esperado_alguno": [
+   "mascota",
+   "no se permiten",
+   "no se aceptan",
+   "no puede",
+   "no, ",
+   "no es posible"
+  ],
+  "prolog": "No entendi tu pregunta. Escribe \"ayuda\" para ver ejemplos.",
+  "prolog_ms": 0.2,
+  "prolog_ok": false,
+  "llm": "No, no se permiten mascotas en el hotel.",
+  "llm_ms": 2000.4,
+  "llm_ok": true
+ },
+ {
+  "id": 14,
+  "categoria": "Razonamiento",
+  "pregunta": "¿Cuál es la habitación libre más barata?",
+  "esperado_todos": [
+   "102",
+   "75000"
+  ],
+  "criterio": "102 (doble, $75.000); la 101 más barata está ocupada. Acepta 75.000 con punto.",
+  "prolog": "La habitacion libre mas barata es la 102 (doble): $75000 por noche.",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "La habitación libre más barata es la 102 (doble) a 75.000 CLP por noche.",
+  "llm_ms": 1701.3,
+  "llm_ok": false
+ },
+ {
+  "id": 15,
+  "categoria": "Razonamiento",
+  "pregunta": "¿La 101 tiene desayuno?",
+  "esperado_todos": [
+   "no"
+  ],
+  "criterio": "No: la 101 es simple (solo wifi).",
+  "prolog": "No, la habitacion 101 no incluye desayuno.",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "No, la habitación 101 es de tipo simple y solo incluye wifi. No incluye desayuno.",
+  "llm_ms": 1719.0,
+  "llm_ok": true
+ },
+ {
+  "id": 16,
+  "categoria": "Precios",
+  "pregunta": "¿Cuánto cuesta la 301 por 2 noches?",
+  "esperado_alguno": [
+   "300000",
+   "300.000"
+  ],
+  "criterio": "2 x 150.000 = 300.000 (aunque esté ocupada, el precio existe).",
+  "prolog": "La habitacion 301 (suite) cuesta $150000 por noche (2 noche(s): $300000).",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "La habitación 301 se encuentra ocupada actualmente, por lo que no está disponible para reserva.",
+  "llm_ms": 1873.6,
+  "llm_ok": false
+ },
+ {
+  "id": 17,
+  "categoria": "Lenguaje natural",
+  "pregunta": "Somos una familia de 4 y queremos dos habitaciones juntas, ¿tienen?",
+  "esperado_todos": [
+   "201",
+   "202"
+  ],
+  "criterio": "201 y 202 (dobles contiguas libres, 2+2 personas).",
+  "prolog": "Pares de habitaciones contiguas libres:\n  201 y 202",
+  "prolog_ms": 0.3,
+  "prolog_ok": true,
+  "llm": "Sí, tenemos disponibles las habitaciones 201 y 202, que son contiguas y tienen capacidad para 2 personas cada una. El costo total por noche es de 150.000 CLP (75.000 CLP por cada una).",
+  "llm_ms": 1701.2,
+  "llm_ok": true
+ },
+ {
+  "id": 18,
+  "categoria": "Razonamiento",
+  "pregunta": "Llego mañana y mi plan cambió, ¿puedo cancelar gratis el día anterior?",
+  "esperado_alguno": [
+   "no es gratis",
+   "no es gratuit",
+   "no, ",
+   "no podr",
+   "no puede",
+   "ya no",
+   "no se puede",
+   "no seria",
+   "no sería"
+  ],
+  "criterio": "Cancelar el día anterior (≈24 h) NO es gratis: la gratuita es hasta 48 h antes. Requiere razonar, no solo citar la política.",
+  "esperado_todos": [
+   "48"
+  ],
+  "prolog": "Cancelacion gratuita hasta 48 horas antes de la llegada.",
+  "prolog_ms": 0.2,
+  "prolog_ok": false,
+  "llm": "No, la política de cancelación gratuita es hasta 48 horas antes de la llegada. No es posible cancelar gratis el día anterior.",
+  "llm_ms": 1661.6,
+  "llm_ok": true
+ },
+ {
+  "id": 19,
+  "categoria": "Fuera de la base",
+  "pregunta": "¿Tienen piscina?",
+  "esperado_alguno": [
+   "no tengo",
+   "no hay informacion",
+   "no hay información",
+   "no cuenta",
+   "no entendi",
+   "no entendí",
+   "no pude",
+   "no dispongo"
+  ],
+  "criterio": "Debe admitir que no tiene esa información (no inventar).",
+  "prolog": "No entendi tu pregunta. Escribe \"ayuda\" para ver ejemplos.",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "No tengo esa información.",
+  "llm_ms": 1630.1,
+  "llm_ok": true
+ },
+ {
+  "id": 20,
+  "categoria": "Fuera del dominio",
+  "pregunta": "¿Cuál es la capital de Francia?",
+  "esperado_alguno": [
+   "no tengo",
+   "no puedo",
+   "solo",
+   "sólo",
+   "no entendi",
+   "no entendí",
+   "no pude",
+   "no dispongo",
+   "hotel"
+  ],
+  "criterio": "No debe responder (fuera del dominio del hotel).",
+  "prolog": "No entendi tu pregunta. Escribe \"ayuda\" para ver ejemplos.",
+  "prolog_ms": 0.2,
+  "prolog_ok": true,
+  "llm": "No tengo esa información.",
+  "llm_ms": 1871.7,
+  "llm_ok": true
+ }
+]
